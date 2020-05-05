@@ -3,7 +3,6 @@ const robot = require("robotjs")
 
 const gk = new GK()
 
-let mousePosition;
 let flag;
 
 gk.start()
@@ -136,7 +135,7 @@ function wait(time) {
     return new Promise((resolve) => {
       setTimeout(resolve, time);
     });
-  }
+}
 
 gk.on('error', error => {
     console.error(error)
