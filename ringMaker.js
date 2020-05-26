@@ -50,13 +50,10 @@ async function smithLoop() {
 
 async function colorChecker(){
     let barCheck = robot.getMousePos(bar.x, bar.y);
-    console.log(barCheck, 444)
     barCheck.color = robot.getPixelColor(barCheck.x, barCheck.y);
-    console.log(barCheck.color, bar.color)
+    console.log(`Checked Color: ${barCheck.color}`, `Original Color: ${bar.color}`)
     if(barCheck.color !== bar.color){
         loop = false;
-        console.log(barCheck.color, 1)
-        console.log(bar.color, 2)
         robot.moveMouseSmooth(803, 68);
         robot.mouseClick();
         robot.moveMouseSmooth(1284, 880)
@@ -73,25 +70,36 @@ async function colorChecker(){
 async function smith() {
     let counter;
     robot.moveMouseSmooth(708, 466);
-    await wait(500)
+    await wait(1000)
     robot.mouseClick();
     robot.moveMouseSmooth(bar.x, bar.y);
     await colorChecker();
     await wait(800)
     robot.mouseClick();
+    robot.moveMouseSmooth(454, 143);
+    robot.mouseClick()
+    await wait(1000)
     robot.moveMouseSmooth(1385, 283);
     robot.mouseClick();
     await wait(6000);
-    robot.keyTap('space');
-    await wait(165000);
+    robot.moveMouseSmooth(474, 324);
+    robot.mouseClick();
+    await wait(28000);
     // normal wait time 165000
     robot.moveMouseSmooth(1270, 153);
     robot.mouseClick();
-    await wait (6000);
+    await wait (7000);
     robot.moveMouseSmooth(708, 466);
     robot.mouseClick();
-    robot.moveMouseSmooth(1260, 629);
-    await wait(300)
+    await wait(300);
+    robot.moveMouseSmooth(1262, 629);
+    await(500);
+    robot.mouseClick();
+    robot.moveMouseSmooth(1263, 735);
+    await wait(500);
+    robot.mouseClick();
+    robot.moveMouseSmooth(1302, 841);
+    await wait(500);
     robot.mouseClick();
     counter += 1;
     console.log(`This has run ${counter} times` )
@@ -107,4 +115,4 @@ function wait(time) {
 gk.on('error', error => {
     console.error(error)
 });
-            
+    
