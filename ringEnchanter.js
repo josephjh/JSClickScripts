@@ -12,7 +12,7 @@ gk.on('press', async data => {
         case '1':
             bar = robot.getMousePos();
             bar.color = robot.getPixelColor(bar.x, bar.y)
-            console.log(bar)
+            console.log(bar, bar.color)
             break;
         case '2':
             smith();
@@ -49,14 +49,11 @@ async function smithLoop() {
 };
 
 async function colorChecker(){
-    let barCheck = robot.getMousePos(bar.x, bar.y);
-    console.log(barCheck, 444)
-    barCheck.color = robot.getPixelColor(barCheck.x, barCheck.y);
-    console.log(barCheck.color, bar.color)
-    if(barCheck.color !== bar.color){
+    let ringCheck = {x: 403, y: 137}
+    ringCheck.color = 'a78c09';
+    console.log(`Checked Color: ${ringCheck.color}`, `Original Color: ${ring.color}`)
+    if(ringCheck.color !== ring.color){
         loop = false;
-        console.log(barCheck.color, 1)
-        console.log(bar.color, 2)
         robot.moveMouseSmooth(803, 68);
         robot.mouseClick();
         robot.moveMouseSmooth(1284, 880)
@@ -71,30 +68,30 @@ async function colorChecker(){
 };
 
 async function smith() {
-    let counter;
     robot.moveMouseSmooth(708, 466);
-    await wait(500)
+    await wait(1000)
+    robot.mouseClick();
+    console.log('bank opened')
+    await wait(200)
+    robot.moveMouseSmooth(1256, 626);
     robot.mouseClick();
     robot.moveMouseSmooth(bar.x, bar.y);
-    await colorChecker();
-    await wait(800)
+    await wait(1000)
     robot.mouseClick();
-    robot.moveMouseSmooth(1385, 283);
+    console.log('rings withdrawn')
+    robot.moveMouseSmooth(803, 68);
     robot.mouseClick();
-    await wait(6000);
-    robot.keyTap('space');
-    await wait(165000);
-    // normal wait time 165000
-    robot.moveMouseSmooth(1270, 153);
+    console.log('bank closed');
+    robot.moveMouseSmooth(1380, 583);
     robot.mouseClick();
-    await wait (6000);
-    robot.moveMouseSmooth(708, 466);
+    console.log('spell book opened')
+    await wait(300);
+    robot.moveMouseSmooth(1258, 664);
     robot.mouseClick();
-    robot.moveMouseSmooth(1260, 629);
-    await wait(300)
+    await wait(300);
     robot.mouseClick();
-    counter += 1;
-    console.log(`This has run ${counter} times` )
+    await wait(120000);
+    console.log('enchanting')
 }
 
 function wait(time) {
@@ -107,4 +104,4 @@ function wait(time) {
 gk.on('error', error => {
     console.error(error)
 });
-            
+    
